@@ -1,9 +1,9 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
+const patientRoutes = require('./routes/patientRoutes');
 
 dotenv.config();
 
@@ -19,6 +19,9 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.log(err));
 
 app.use('/api/auth', authRoutes);
+
+// API Routes
+app.use("/api", patientRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
