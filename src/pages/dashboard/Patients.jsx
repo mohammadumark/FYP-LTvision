@@ -4,10 +4,11 @@ import axios from "axios";
 export function Patients() {
   const [patients, setPatients] = useState([]);
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
+  const [doctorId, setDoctorId] = useState(""); // Add doctor ID if needed
   const [status, setStatus] = useState("Active");
   const [lastVisit, setLastVisit] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
+  const [showForm, setShowForm] = useState(false); // Toggle form visibility
 
   useEffect(() => {
     fetchPatients();
@@ -27,7 +28,7 @@ export function Patients() {
 
     const patientData = {
       name,
-      id,
+      doctorId,
       status,
       lastVisit,
       diagnosis,
@@ -43,10 +44,11 @@ export function Patients() {
       
       // Clear form fields after successful submission
       setName("");
-      setId("");
+      setDoctorId("");
       setStatus("Active");
       setLastVisit("");
       setDiagnosis("");
+      setShowForm(false); // Hide form after adding patient
 
       // Fetch updated patient list
       fetchPatients();
@@ -62,60 +64,61 @@ export function Patients() {
           <h2 className="text-xl font-bold">Patient List</h2>
           <button
             className="bg-blue-500 text-white py-2 px-4 rounded"
-            onClick={() => document.getElementById("addPatientForm").classList.toggle("hidden")}
+            onClick={() => setShowForm(!showForm)}
           >
             + Add Patient
           </button>
         </div>
 
-        <form id="addPatientForm" className="mb-4 hidden" onSubmit={handleAddPatient}>
-          <div className="flex flex-col gap-2">
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="border rounded p-2"
-            />
-            <input
-              type="text"
-              placeholder="#ID"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-              required
-              className="border rounded p-2"
-            />
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="border rounded p-2"
-            >
-              <option value="Active">Active</option>
-              <option value="Non-Active">Non-Active</option>
-              <option value="New Patient">New Patient</option>
-            </select>
-            <input
-              type="date"
-              placeholder="Last Visit"
-              value={lastVisit}
-              onChange={(e) => setLastVisit(e.target.value)}
-              required
-              className="border rounded p-2"
-            />
-            <input
-              type="text"
-              placeholder="Diagnosis"
-              value={diagnosis}
-              onChange={(e) => setDiagnosis(e.target.value)}
-              required
-              className="border rounded p-2"
-            />
-            <button type="submit" className="bg-blue-500 text-white py-2 rounded">
-              Add Patient
-            </button>
-          </div>
-        </form>
+        {showForm && (
+          <form id="addPatientForm" className="mb-4" onSubmit={handleAddPatient}>
+            <div className="flex flex-col gap-2">
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="border rounded p-2"
+              />
+              <input
+                type="text"
+                placeholder="Doctor ID"
+                value={doctorId}
+                onChange={(e) => setDoctorId(e.target.value)}
+                className="border rounded p-2"
+              />
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="border rounded p-2"
+              >
+                <option value="Active">Active</option>
+                <option value="Non-Active">Non-Active</option>
+                <option value="New Patient">New Patient</option>
+              </select>
+              <input
+                type="date"
+                placeholder="Last Visit"
+                value={lastVisit}
+                onChange={(e) => setLastVisit(e.target.value)}
+                required
+                className="border rounded p-2"
+              />
+              <input
+                type="text"
+                placeholder="Diagnosis"
+                value={diagnosis}
+                onChange={(e) => setDiagnosis(e.target.value)}
+                required
+                className="border rounded p-2"
+              />
+              <button type="submit" className="bg-blue-500 text-white py-2 rounded">
+                Add Patient
+              </button>
+            </div>
+          </form>
+        )}
 
         <table className="min-w-full bg-white border rounded shadow-md">
           <thead>
@@ -129,13 +132,17 @@ export function Patients() {
             </tr>
           </thead>
           <tbody>
-            {patients.map((patient, index) => (
-              <tr key={index} className="hover:bg-gray-100">
+            {patients.map((patient) => (
+              <tr key={patient.id} className="hover:bg-gray-100">
                 <td className="py-2 px-4 border-b">{patient.name}</td>
                 <td className="py-2 px-4 border-b">{patient.id}</td>
-                <td className={`py-2 px-4 border-b ${patient.statusColor}`}>{patient.status}</td>
+                <td className="py-2 px-4 border-b" style={{ color: patient.statusColor }}>
+                  {patient.status}
+                </td>
                 <td className="py-2 px-4 border-b">{patient.lastVisit}</td>
-                <td className={`py-2 px-4 border-b ${patient.diagnosisColor}`}>{patient.diagnosis}</td>
+                <td className="py-2 px-4 border-b" style={{ color: patient.diagnosisColor }}>
+                  {patient.diagnosis}
+                </td>
                 <td className="py-2 px-4 border-b space-x-2">
                   <button className="text-red-500 hover:underline">Remove</button>
                   <a href="#" className="text-blue-500 hover:underline">Profile</a>
