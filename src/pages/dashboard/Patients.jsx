@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import MedicalProfileScreen from "./MedicalProfileScreen"; // Import the MedicalProfileScreen component
 
 export function Patients() {
   const [patients, setPatients] = useState([]);
@@ -9,6 +10,8 @@ export function Patients() {
   const [lastVisit, setLastVisit] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
   const [showForm, setShowForm] = useState(false); // Toggle form visibility
+  const [showProfile, setShowProfile] = useState(false); // New state for toggling profile view
+  const [selectedPatient, setSelectedPatient] = useState(null); // State to track selected patient
 
   useEffect(() => {
     fetchPatients();
@@ -56,6 +59,17 @@ export function Patients() {
       console.error("Error adding patient:", error.response ? error.response.data : error.message);
     }
   };
+
+  // Handler to switch to the medical profile screen
+  const handleViewProfile = (patient) => {
+    setSelectedPatient(patient); // Save the selected patient details
+    setShowProfile(true); // Switch to profile view
+  };
+
+  // Render either the patient list or the profile screen based on state
+  if (showProfile && selectedPatient) {
+    return <MedicalProfileScreen patient={selectedPatient} />;
+  }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -136,16 +150,17 @@ export function Patients() {
               <tr key={patient.id} className="hover:bg-gray-100">
                 <td className="py-2 px-4 border-b">{patient.name}</td>
                 <td className="py-2 px-4 border-b">{patient.id}</td>
-                <td className="py-2 px-4 border-b" style={{ color: patient.statusColor }}>
-                  {patient.status}
-                </td>
+                <td className="py-2 px-4 border-b">{patient.status}</td>
                 <td className="py-2 px-4 border-b">{patient.lastVisit}</td>
-                <td className="py-2 px-4 border-b" style={{ color: patient.diagnosisColor }}>
-                  {patient.diagnosis}
-                </td>
+                <td className="py-2 px-4 border-b">{patient.diagnosis}</td>
                 <td className="py-2 px-4 border-b space-x-2">
+                  <button
+                    className="text-blue-500 hover:underline"
+                    onClick={() => handleViewProfile(patient)}
+                  >
+                    Profile
+                  </button>
                   <button className="text-red-500 hover:underline">Remove</button>
-                  <a href="#" className="text-blue-500 hover:underline">Profile</a>
                 </td>
               </tr>
             ))}
