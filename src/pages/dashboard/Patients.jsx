@@ -7,7 +7,7 @@ export function Patients() {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("Active");
   const [lastVisit, setLastVisit] = useState("");
-  const [diagnosis, setDiagnosis] = useState("");
+  const [diagnosis, setDiagnosis] = useState("Normal"); // Set default diagnosis to Normal
   const [showForm, setShowForm] = useState(false); // Toggle form visibility
   const [showProfile, setShowProfile] = useState(false); // New state for toggling profile view
   const [selectedPatient, setSelectedPatient] = useState(null); // State to track selected patient
@@ -67,7 +67,7 @@ export function Patients() {
       setName("");
       setStatus("Active");
       setLastVisit("");
-      setDiagnosis("");
+      setDiagnosis("Normal");
       setShowForm(false); // Hide form after adding patient
 
       // Fetch updated patient list
@@ -81,6 +81,31 @@ export function Patients() {
   const handleViewProfile = (patient) => {
     setSelectedPatient(patient); // Save the selected patient details
     setShowProfile(true); // Switch to profile view
+  };
+
+  // Helper function to format the date
+  const formatDate = (date) => {
+    const formattedDate = new Date(date);
+    return formattedDate.toISOString().split('T')[0]; // Formats as YYYY-MM-DD
+  };
+
+  // Helper function to determine the diagnosis color
+  const getDiagnosisColor = (diagnosis) => {
+    return diagnosis === "Normal" ? "text-green-500" : "text-red-500";
+  };
+
+  // Helper function to determine the status color
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Active":
+        return "text-blue-500";
+      case "Non-Active":
+        return "text-red-500";
+      case "New Patient":
+        return "text-green-500";
+      default:
+        return "text-black";
+    }
   };
 
   // Render either the patient list or the profile screen based on state
@@ -130,14 +155,14 @@ export function Patients() {
                 required
                 className="border rounded p-2"
               />
-              <input
-                type="text"
-                placeholder="Diagnosis"
+              <select
                 value={diagnosis}
                 onChange={(e) => setDiagnosis(e.target.value)}
-                required
                 className="border rounded p-2"
-              />
+              >
+                <option value="Normal">Normal</option>
+                <option value="Diagnosed">Diagnosed</option>
+              </select>
               <button type="submit" className="bg-blue-500 text-white py-2 rounded">
                 Add Patient
               </button>
@@ -161,10 +186,10 @@ export function Patients() {
             {patients.map((patient) => (
               <tr key={patient.id} className="hover:bg-gray-100">
                 <td className="py-2 px-4 border-b">{patient.name}</td>
-                <td className="py-2 px-4 border-b">{patient.id}</td>
-                <td className="py-2 px-4 border-b">{patient.status}</td>
-                <td className="py-2 px-4 border-b">{patient.lastVisit}</td>
-                <td className="py-2 px-4 border-b">{patient.diagnosis}</td>
+                <td className="py-2 px-4 border-b">{`P-${patient.id}`}</td> {/* Add P- prefix to ID */}
+                <td className={`py-2 px-4 border-b ${getStatusColor(patient.status)}`}>{patient.status}</td>
+                <td className="py-2 px-4 border-b">{formatDate(patient.lastVisit)}</td>
+                <td className={`py-2 px-4 border-b ${getDiagnosisColor(patient.diagnosis)}`}>{patient.diagnosis}</td>
                 <td className="py-2 px-4 border-b space-x-2">
                   <button
                     className="text-blue-500 hover:underline"
