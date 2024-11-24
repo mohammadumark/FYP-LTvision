@@ -119,24 +119,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
   }
 });
 
-// // Upload route
-// app.post('/api/upload', authenticateToken, upload.single('ctScan'), (req, res) => {
-//   if (!req.file) {
-//       return res.status(400).send('No file uploaded.');
-//   }
-//   res.json({ file: req.file });
-// });
 
-// // Get uploaded files
-// app.get('/api/files/:filename', (req, res) => {
-//   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-//       if (!file || file.length === 0) {
-//           return res.status(404).send('File not found');
-//       }
-//       const readstream = gfs.createReadStream(file.filename);
-//       readstream.pipe(res);
-//   });
-// });
 
 
 module.exports = router;

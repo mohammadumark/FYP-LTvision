@@ -5,7 +5,11 @@ const Counter = require('./counterModel'); // Import the counter model
 const patientSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    doctorId: { type: String, required: true }, // Store doctorId as a string
+    doctorId: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User', // Assuming 'User' is the model for the doctors
+      required: true 
+    },
     status: { type: String, required: true },
     lastVisit: { type: Date, required: true },
     diagnosis: { type: String, required: true },

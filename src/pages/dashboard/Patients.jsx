@@ -5,7 +5,6 @@ import MedicalProfileScreen from "./MedicalProfileScreen"; // Import the Medical
 export function Patients() {
   const [patients, setPatients] = useState([]);
   const [name, setName] = useState("");
-  const [doctorId, setDoctorId] = useState(""); // Add doctor ID if needed
   const [status, setStatus] = useState("Active");
   const [lastVisit, setLastVisit] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
@@ -13,41 +12,59 @@ export function Patients() {
   const [showProfile, setShowProfile] = useState(false); // New state for toggling profile view
   const [selectedPatient, setSelectedPatient] = useState(null); // State to track selected patient
 
+  // Get token from localStorage
+  const token = localStorage.getItem("token"); // Get the JWT token from localStorage
+
+  // Fetch patients on component mount
   useEffect(() => {
     fetchPatients();
   }, []);
 
+  // Fetch the list of patients from the backend
   const fetchPatients = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/patients");
+      const response = await axios.get("http://localhost:5000/api/patients", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Send token in Authorization header
+        },
+      });
       setPatients(response.data);
     } catch (error) {
       console.error("Error fetching patients:", error);
     }
   };
 
+  // Handle the form submission for adding a new patient
   const handleAddPatient = async (e) => {
     e.preventDefault();
 
+    if (!token) {
+      console.error("Token is missing");
+      return; // Handle appropriately
+    }
+
     const patientData = {
       name,
-      doctorId,
       status,
       lastVisit,
       diagnosis,
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/patients/add", patientData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/patients/add",
+        patientData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send token in Authorization header
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("Patient added successfully:", response.data);
-      
+
       // Clear form fields after successful submission
       setName("");
-      setDoctorId("");
       setStatus("Active");
       setLastVisit("");
       setDiagnosis("");
@@ -84,6 +101,7 @@ export function Patients() {
           </button>
         </div>
 
+        {/* Patient Form */}
         {showForm && (
           <form id="addPatientForm" className="mb-4" onSubmit={handleAddPatient}>
             <div className="flex flex-col gap-2">
@@ -93,13 +111,6 @@ export function Patients() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="border rounded p-2"
-              />
-              <input
-                type="text"
-                placeholder="Doctor ID"
-                value={doctorId}
-                onChange={(e) => setDoctorId(e.target.value)}
                 className="border rounded p-2"
               />
               <select
@@ -134,6 +145,7 @@ export function Patients() {
           </form>
         )}
 
+        {/* Patient List Table */}
         <table className="min-w-full bg-white border rounded shadow-md">
           <thead>
             <tr className="bg-blue-100 text-left">

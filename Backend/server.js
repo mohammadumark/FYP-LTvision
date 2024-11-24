@@ -11,17 +11,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.log('Database connection error:', err));
 
+// Routes
 app.use('/api/auth', authRoutes);
-
-// API Routes
-app.use("/api", patientRoutes);
+app.use('/api', patientRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
