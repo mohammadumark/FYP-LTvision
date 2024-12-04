@@ -17,8 +17,10 @@ export function SignUp() {
     password: '',
     confirmPassword: '',
     phoneNumber: '',
-    bloodGroup: '',  // Ensure bloodGroup is correctly set
-    hospitalName: ''
+    bloodGroup: '',
+    hospitalName: '',
+    description: '', // New field for description
+    specialty: '' // New field for specialty
   });
   const navigate = useNavigate();
 
@@ -28,8 +30,15 @@ export function SignUp() {
   };
 
   const handleSelectChange = (value) => {
-    // Handle bloodGroup change explicitly
     setFormData({ ...formData, bloodGroup: value });
+  };
+
+  const handleSpecialtyChange = (value) => {
+    setFormData({ ...formData, specialty: value });
+  };
+
+  const handleHospitalChange = (value) => {
+    setFormData({ ...formData, hospitalName: value });
   };
 
   const handleSubmit = async (e) => {
@@ -44,7 +53,7 @@ export function SignUp() {
       });
 
       if (response.ok) {
-        navigate('/auth/sign-in'); // Redirect to sign-in on successful registration
+        navigate('/auth/sign-in');
       } else {
         const errorData = await response.json();
         console.error('Registration failed:', errorData.error);
@@ -82,9 +91,8 @@ export function SignUp() {
             <Input size="lg" type="password" label="Password" name="password" value={formData.password} onChange={handleChange} />
             <Input size="lg" type="password" label="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
             <Input size="lg" label="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-            
-            {/* BloodGroup Select Field */}
-            <Select label="Blood Group" size="lg" value={formData.bloodGroup} onChange={(value) => handleSelectChange(value)}>
+
+            <Select label="Blood Group" size="lg" value={formData.bloodGroup} onChange={handleSelectChange}>
               <Option value="O+">O+</Option>
               <Option value="O-">O-</Option>
               <Option value="A+">A+</Option>
@@ -95,33 +103,44 @@ export function SignUp() {
               <Option value="AB-">AB-</Option>
             </Select>
 
-            <Input size="lg" label="Hospital Name" name="hospitalName" value={formData.hospitalName} onChange={handleChange} />
+            {/* Description Field */}
+            <Input size="lg" label="Description" name="description" value={formData.description} onChange={handleChange} />
+
+            {/* Specialty Dropdown */}
+            <Select label="Specialty" size="lg" value={formData.specialty} onChange={handleSpecialtyChange}>
+              <Option value="Liver Surgeon">Liver Surgeon</Option>
+              <Option value="Hepatologist">Hepatologist</Option>
+              <Option value="Oncologist">Oncologist</Option>
+              <Option value="Radiologist">Radiologist</Option>
+              <Option value="Gastroenterologist">Gastroenterologist</Option>
+            </Select>
+
+            {/* Hospital Dropdown */}
+            <Select label="Hospital Name" size="lg" value={formData.hospitalName} onChange={handleHospitalChange}>
+              {/* List of hospitals in Punjab, Pakistan */}
+              <Option value="Lahore General Hospital">Lahore General Hospital</Option>
+              <Option value="Mayo Hospital Lahore">Mayo Hospital Lahore</Option>
+              <Option value="Punjab Institute of Cardiology">Punjab Institute of Cardiology</Option>
+              <Option value="Services Hospital Lahore">Services Hospital Lahore</Option>
+              {/* Add more hospitals as required */}
+            </Select>
           </div>
+
           <Checkbox
-            label={(
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center justify-start font-medium"
-              >
+            label={
+              <Typography variant="small" color="gray" className="flex items-center justify-start font-medium">
                 I agree to the&nbsp;
-                <a
-                  href="#"
-                  className="font-normal text-black transition-colors hover:text-gray-900 underline"
-                >
+                <a href="#" className="font-normal text-black transition-colors hover:text-gray-900 underline">
                   Terms and Conditions
                 </a>
               </Typography>
-            )}
+            }
             containerProps={{ className: "-ml-2.5" }}
           />
           <Button type="submit" className="mt-6" fullWidth>
             Register Now
           </Button>
-          <Typography
-            variant="paragraph"
-            className="text-center text-blue-gray-500 font-medium mt-4"
-          >
+          <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
             Already have an account?
             <Link to="/auth/sign-in" className="text-gray-900 ml-1">
               Sign in

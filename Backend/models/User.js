@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
   hospitalName: {
     type: String,
   },
+  description: {
+    type: String, // New field for description
+  },
+  specialty: {
+    type: String, // New field for specialty
+  }
 });
 
 const User = mongoose.model('User', userSchema);

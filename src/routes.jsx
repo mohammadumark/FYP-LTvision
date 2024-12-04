@@ -9,11 +9,10 @@ import {
   ChatBubbleBottomCenterTextIcon, // Import for Chats
   ArrowUpTrayIcon, // Import for Upload CT Scan
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Appointments, Notifications } from "@/pages/dashboard";
+import { Home, Profile, Appointment, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Patients from "./pages/dashboard/Patients";
 import Chats from "./pages/dashboard/Chats";
-import UploadCTScan from "./pages/dashboard/UploadCTScan"; // Import Upload CT Scan component
 import UploadCtScans from "./pages/dashboard/UploadCtScans";
 
 const icon = {
@@ -40,7 +39,7 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "Appointments",
         path: "/Appointments",
-        element: <Appointments />,
+        element: <Appointment/>,
       },
       {
         icon: <UserGroupIcon {...icon} />, // Updated icon for Patients

@@ -21,7 +21,7 @@ const authenticateToken = (req, res, next) => {
 
 // Registration route
 router.post('/register', async (req, res) => {
-  const { username, email, password, phoneNumber, bloodGroup, hospitalName } = req.body;
+  const { username, email, password, phoneNumber, bloodGroup, hospitalName, description, specialty } = req.body;
 
   try {
     // Check if user already exists
@@ -41,6 +41,8 @@ router.post('/register', async (req, res) => {
       phoneNumber,
       bloodGroup,
       hospitalName,
+      description,
+      specialty,
     });
 
     await newUser.save();
@@ -95,7 +97,15 @@ router.get('/profile', authenticateToken, async (req, res) => {
 
 // Update Profile route
 router.put('/profile', authenticateToken, async (req, res) => {
-  const { username, email, phoneNumber, bloodGroup, hospitalName } = req.body;
+  const { 
+    username, 
+    email, 
+    phoneNumber, 
+    bloodGroup, 
+    hospitalName, 
+    description, 
+    speciality 
+  } = req.body;
 
   try {
     // Find the user by ID stored in the token
@@ -110,6 +120,8 @@ router.put('/profile', authenticateToken, async (req, res) => {
     user.phoneNumber = phoneNumber || user.phoneNumber;
     user.bloodGroup = bloodGroup || user.bloodGroup;
     user.hospitalName = hospitalName || user.hospitalName;
+    user.description = description || user.description;
+    user.speciality = speciality || user.speciality;
 
     await user.save(); // Save the updated user data
     res.json({ message: 'Profile updated successfully', user });
@@ -118,7 +130,6 @@ router.put('/profile', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 
 

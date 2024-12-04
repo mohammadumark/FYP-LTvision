@@ -59,4 +59,21 @@ const addPatient = async (req, res) => {
   }
 };
 
-module.exports = { getPatients, addPatient };
+// Remove a patient
+const removePatient = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Ensure the ID is cast to ObjectId
+    const patientId = mongoose.Types.ObjectId(id);
+    const patient = await Patient.findByIdAndDelete(patientId);
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+    res.status(200).json({ message: 'Patient removed successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error removing patient', error: error.message });
+  }
+};
+
+module.exports = { getPatients, addPatient, removePatient };

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCalendarAlt, FaComment, FaTimes, FaClock } from "react-icons/fa";
 
-export function Appointments() {
+export function Appointment() {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
         <div className="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6">
@@ -86,4 +86,4 @@ export function Appointments() {
   );
 }
 
-export default Appointments;
+export default Appointment;

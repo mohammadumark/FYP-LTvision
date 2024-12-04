@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Typography, Select, Option } from "@material-tailwind/react";
+import { Input, Button, Typography, Select, Option, Textarea } from "@material-tailwind/react";
 
 export function Profile() {
   const [profileData, setProfileData] = useState({
@@ -9,6 +9,8 @@ export function Profile() {
     bloodGroup: '',
     hospitalName: '',
     password: '',
+    specialty: '',
+    description: '',
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -29,6 +31,8 @@ export function Profile() {
             phoneNumber: data.phoneNumber,
             bloodGroup: data.bloodGroup,
             hospitalName: data.hospitalName,
+            specialty: data.specialty || '',
+            description: data.description || '',
           });
         } else {
           console.error('Error fetching profile data:', data.error);
@@ -50,8 +54,7 @@ export function Profile() {
     setProfileData({ ...profileData, bloodGroup: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/auth/profile', {
         method: 'PUT',
@@ -63,8 +66,8 @@ export function Profile() {
       });
 
       if (response.ok) {
-        setIsEditing(false);
         console.log('Profile updated successfully');
+        setIsEditing(false); // Exit editing mode
       } else {
         const errorData = await response.json();
         console.error('Failed to update profile:', errorData.error);
@@ -77,20 +80,27 @@ export function Profile() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-blue-40">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
-
         <div className="flex flex-col items-center mb-8">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxapDwCeVLL0T69nhwV_BgqH9lztNDYQGhCbUVKHMgITKzGDlPsa55HS-6dqUdC8Qt5VU&usqp=CAU" // Replace with actual profile image URL if available
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxapDwCeVLL0T69nhwV_BgqH9lztNDYQGhCbUVKHMgITKzGDlPsa55HS-6dqUdC8Qt5VU&usqp=CAU"
             alt="Profile"
             className="w-24 h-24 rounded-full border-4 border-white shadow-md"
           />
           <Typography variant="h5" className="mt-4">
-          {profileData.username || 'N/A'}
+            {profileData.username || 'N/A'}
           </Typography>
-          <Typography className="text-gray-600">Hepatologist</Typography>
+          <Typography className="text-gray-600">{profileData.specialty || 'Specialty not set'}</Typography>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form className="space-y-6">
+          <Textarea
+            label="Description"
+            name="description"
+            value={profileData.description}
+            onChange={handleChange}
+            rows={4}
+            disabled={!isEditing}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               size="lg"
@@ -137,6 +147,14 @@ export function Profile() {
           </div>
           <Input
             size="lg"
+            label="Specialty"
+            name="specialty"
+            value={profileData.specialty}
+            onChange={handleChange}
+            disabled={!isEditing}
+          />
+          <Input
+            size="lg"
             label="Hospital Name"
             name="hospitalName"
             value={profileData.hospitalName}
@@ -157,8 +175,12 @@ export function Profile() {
           <div className="flex justify-center mt-4">
             {isEditing ? (
               <>
-                <Button type="submit">Save</Button>
-                <Button variant="outlined" onClick={() => setIsEditing(false)} className="ml-4">
+                <Button onClick={handleSubmit}>Update</Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setIsEditing(false)}
+                  className="ml-4"
+                >
                   Cancel
                 </Button>
               </>
