@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Typography, Select, Option, Textarea } from "@material-tailwind/react";
+import { Input, Button, Typography, Select, Option, Textarea, Switch } from "@material-tailwind/react";
 
 export function Profile() {
   const [profileData, setProfileData] = useState({
@@ -11,6 +11,7 @@ export function Profile() {
     password: '',
     specialty: '',
     description: '',
+    isAvailable: false,
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +34,7 @@ export function Profile() {
             hospitalName: data.hospitalName,
             specialty: data.specialty || '',
             description: data.description || '',
+            isAvailable: data.isAvailable || false,
           });
         } else {
           console.error('Error fetching profile data:', data.error);
@@ -52,6 +54,13 @@ export function Profile() {
 
   const handleSelectChange = (value) => {
     setProfileData({ ...profileData, bloodGroup: value });
+  };
+
+  const handleAvailabilityToggle = () => {
+    setProfileData((prevData) => ({
+      ...prevData,
+      isAvailable: !prevData.isAvailable,
+    }));
   };
 
   const handleSubmit = async () => {
@@ -93,85 +102,136 @@ export function Profile() {
         </div>
 
         <form className="space-y-6">
-          <Textarea
-            label="Description"
-            name="description"
-            value={profileData.description}
-            onChange={handleChange}
-            rows={4}
-            disabled={!isEditing}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              size="lg"
-              label="Name"
-              name="username"
-              value={profileData.username}
-              onChange={handleChange}
+
+
+          {/* Availability Switch */}
+          <div className="flex items-center">
+            <Typography variant="h6" className="mr-4">
+              Availability
+            </Typography>
+            <Switch
+              label={profileData.isAvailable ? 'Available' : 'Not Available'}
+              checked={profileData.isAvailable}
+              onChange={handleAvailabilityToggle}
               disabled={!isEditing}
             />
+          </div>
+
+
+
+          {/* Description Section */}
+          <div>
+            <Typography variant="h6">Description</Typography>
+            <Textarea
+              label="Description"
+              name="description"
+              value={profileData.description}
+              onChange={handleChange}
+              rows={4}
+              disabled={!isEditing}
+            />
+          </div>
+
+          {/* Name and Email */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Typography variant="h6">Name</Typography>
+              <Input
+                size="lg"
+                label="Name"
+                name="username"
+                value={profileData.username}
+                onChange={handleChange}
+                disabled={!isEditing}
+              />
+            </div>
+            <div>
+              <Typography variant="h6">Email</Typography>
+              <Input
+                size="lg"
+                label="Email"
+                name="email"
+                value={profileData.email}
+                onChange={handleChange}
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+
+          {/* Phone Number and Blood Group */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Typography variant="h6">Phone No</Typography>
+              <Input
+                size="lg"
+                label="Phone No"
+                name="phoneNumber"
+                value={profileData.phoneNumber}
+                onChange={handleChange}
+                disabled={!isEditing}
+              />
+            </div>
+            <div>
+              <Typography variant="h6">Blood Group</Typography>
+              <Select
+                label="Blood Group"
+                size="lg"
+                value={profileData.bloodGroup}
+                onChange={handleSelectChange}
+                disabled={!isEditing}
+              >
+                <Option value="O+">O+</Option>
+                <Option value="O-">O-</Option>
+                <Option value="A+">A+</Option>
+                <Option value="A-">A-</Option>
+                <Option value="B+">B+</Option>
+                <Option value="B-">B-</Option>
+                <Option value="AB+">AB+</Option>
+                <Option value="AB-">AB-</Option>
+              </Select>
+            </div>
+          </div>
+
+          {/* Specialty and Hospital Name */}
+          <div>
+            <Typography variant="h6">Specialty</Typography>
             <Input
               size="lg"
-              label="Email"
-              name="email"
-              value={profileData.email}
+              label="Specialty"
+              name="specialty"
+              value={profileData.specialty}
               onChange={handleChange}
               disabled={!isEditing}
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Typography variant="h6">Hospital Name</Typography>
             <Input
               size="lg"
-              label="Phone No"
-              name="phoneNumber"
-              value={profileData.phoneNumber}
+              label="Hospital Name"
+              name="hospitalName"
+              value={profileData.hospitalName}
               onChange={handleChange}
               disabled={!isEditing}
             />
-            <Select
-              label="Blood Group"
-              size="lg"
-              value={profileData.bloodGroup}
-              onChange={handleSelectChange}
-              disabled={!isEditing}
-            >
-              <Option value="O+">O+</Option>
-              <Option value="O-">O-</Option>
-              <Option value="A+">A+</Option>
-              <Option value="A-">A-</Option>
-              <Option value="B+">B+</Option>
-              <Option value="B-">B-</Option>
-              <Option value="AB+">AB+</Option>
-              <Option value="AB-">AB-</Option>
-            </Select>
           </div>
-          <Input
-            size="lg"
-            label="Specialty"
-            name="specialty"
-            value={profileData.specialty}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
-          <Input
-            size="lg"
-            label="Hospital Name"
-            name="hospitalName"
-            value={profileData.hospitalName}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
+
+          {/* Password Field (Visible only when editing) */}
           {isEditing && (
-            <Input
-              size="lg"
-              type="password"
-              label="Password"
-              name="password"
-              value={profileData.password}
-              onChange={handleChange}
-            />
+            <div>
+              <Typography variant="h6">Password</Typography>
+              <Input
+                size="lg"
+                type="password"
+                label="Password"
+                name="password"
+                value={profileData.password}
+                onChange={handleChange}
+              />
+            </div>
           )}
 
+          {/* Submit Buttons */}
           <div className="flex justify-center mt-4">
             {isEditing ? (
               <>

@@ -104,7 +104,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
     bloodGroup, 
     hospitalName, 
     description, 
-    speciality 
+    specialty 
   } = req.body;
 
   try {
@@ -121,7 +121,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
     user.bloodGroup = bloodGroup || user.bloodGroup;
     user.hospitalName = hospitalName || user.hospitalName;
     user.description = description || user.description;
-    user.speciality = speciality || user.speciality;
+    user.specialty = specialty || user.specialty;
 
     await user.save(); // Save the updated user data
     res.json({ message: 'Profile updated successfully', user });
