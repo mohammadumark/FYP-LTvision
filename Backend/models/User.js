@@ -30,8 +30,14 @@ const userSchema = new mongoose.Schema({
   },
   specialty: {
     type: String, // New field for specialty
-  }
+  },
+  isAvailable: {
+    type: Boolean,
+    default: false, // Default to false if not set
+  },
+  
 });
+
 
 const User = mongoose.model('User', userSchema);
 

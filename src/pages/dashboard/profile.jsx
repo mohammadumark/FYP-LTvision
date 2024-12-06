@@ -62,6 +62,7 @@ export function Profile() {
       isAvailable: !prevData.isAvailable,
     }));
   };
+  
 
   const handleSubmit = async () => {
     try {

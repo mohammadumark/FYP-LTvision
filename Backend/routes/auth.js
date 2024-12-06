@@ -114,6 +114,29 @@ router.put('/profile', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    // Update Availability route
+router.put('/profile/availability', authenticateToken, async (req, res) => {
+  const { isAvailable } = req.body;
+
+  try {
+    // Find the user by ID stored in the token
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update availability status
+    user.isAvailable = isAvailable;
+
+    await user.save(); // Save the updated availability status
+    res.json({ message: 'Availability status updated successfully', isAvailable });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
     // Update user fields
     user.username = username || user.username;
     user.email = email || user.email;
