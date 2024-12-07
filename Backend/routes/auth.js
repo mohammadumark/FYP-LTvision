@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 
 // JWT secret key
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure key
@@ -18,6 +20,19 @@ const authenticateToken = (req, res, next) => {
     next(); // Proceed to the next middleware or route handler
   });
 };
+
+// Configure storage for uploaded files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Save to the "uploads" directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
+  },
+});
+
+const upload = multer({ storage });
+
 
 // Registration route
 router.post('/register', async (req, res) => {
@@ -89,6 +104,43 @@ router.get('/profile', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     res.json(user); // Send user data
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Upload Profile Picture Route
+router.put('/profile/picture', authenticateToken, upload.single('profilePicture'), async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update the user's profile picture URL
+    user.profilePicture = `/uploads/${req.file.filename}`; // Relative path to the file
+    await user.save();
+
+    res.json({ message: 'Profile picture updated successfully', profilePicture: user.profilePicture });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Delete Profile Picture Route
+router.delete('/profile/picture', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    user.profilePicture = null; // Remove the profile picture URL
+    await user.save();
+
+    res.json({ message: 'Profile picture deleted successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
