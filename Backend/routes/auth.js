@@ -5,6 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');  // Add this line to import the fs module
 
 // JWT secret key
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure key
@@ -20,24 +21,31 @@ const authenticateToken = (req, res, next) => {
     next(); // Proceed to the next middleware or route handler
   });
 };
+// Path to the uploads directory
+const uploadsDir = path.join(__dirname, 'uploads'); // Absolute path
+
+// Ensure the 'uploads' directory exists, if not, create it
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true }); // Create the directory if it doesn't exist
+}
 
 // Configure storage for uploaded files
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Save to the "uploads" directory
+    cb(null, path.join(__dirname, 'uploads'));
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
   },
 });
-
 const upload = multer({ storage });
 
 
 // Registration route
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('profilePicture'), async (req, res) => {
   const { username, email, password, phoneNumber, bloodGroup, hospitalName, description, specialty } = req.body;
-
+  const profilePicture = req.file ? `/uploads/${req.file.filename}` : null;
+  console.log(req.file);
   try {
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -58,6 +66,7 @@ router.post('/register', async (req, res) => {
       hospitalName,
       description,
       specialty,
+      profilePicture, // Save profile picture URL
     });
 
     await newUser.save();
@@ -67,6 +76,7 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 // Login route
 router.post('/login', async (req, res) => {
@@ -129,23 +139,7 @@ router.put('/profile/picture', authenticateToken, upload.single('profilePicture'
   }
 });
 
-// Delete Profile Picture Route
-router.delete('/profile/picture', authenticateToken, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
 
-    user.profilePicture = null; // Remove the profile picture URL
-    await user.save();
-
-    res.json({ message: 'Profile picture deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
 
 // Update Profile route
 router.put('/profile', authenticateToken, async (req, res) => {
@@ -166,29 +160,6 @@ router.put('/profile', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Update Availability route
-router.put('/profile/availability', authenticateToken, async (req, res) => {
-  const { isAvailable } = req.body;
-
-  try {
-    // Find the user by ID stored in the token
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    // Update availability status
-    user.isAvailable = isAvailable;
-
-    await user.save(); // Save the updated availability status
-    res.json({ message: 'Availability status updated successfully', isAvailable });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-
     // Update user fields
     user.username = username || user.username;
     user.email = email || user.email;
@@ -205,6 +176,29 @@ router.put('/profile/availability', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// Update Availability route
+router.put('/profile/availability', authenticateToken, async (req, res) => {
+  const { isAvailable } = req.body;
+
+  try {
+    // Find the user by ID stored in the token
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update the availability status
+    user.isAvailable = isAvailable;
+
+    await user.save(); // Save the updated availability status
+    res.json({ message: 'Availability status updated successfully', isAvailable });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 
 
 

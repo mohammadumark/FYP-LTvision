@@ -26,18 +26,20 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   description: {
-    type: String, // New field for description
+    type: String, // Field for description
   },
   specialty: {
-    type: String, // New field for specialty
+    type: String, // Field for specialty
   },
   isAvailable: {
     type: Boolean,
-    default: false, // Default to false if not set
+    default: false, // Availability status
   },
-  
+  profilePicture: {
+    type: String, // URL or filename for the profile picture
+    default: "https://default.profile.picture.url/placeholder.png", // Default profile picture
+  },
 });
-
 
 const User = mongoose.model('User', userSchema);
 

@@ -19,8 +19,9 @@ export function SignUp() {
     phoneNumber: '',
     bloodGroup: '',
     hospitalName: '',
-    description: '', // New field for description
-    specialty: '' // New field for specialty
+    description: '',
+    specialty: '',
+    profilePicture: null // New field for profile picture
   });
   const navigate = useNavigate();
 
@@ -41,15 +42,21 @@ export function SignUp() {
     setFormData({ ...formData, hospitalName: value });
   };
 
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, profilePicture: e.target.files[0] });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
 
       if (response.ok) {
@@ -91,7 +98,7 @@ export function SignUp() {
             <Input size="lg" type="password" label="Password" name="password" value={formData.password} onChange={handleChange} />
             <Input size="lg" type="password" label="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
             <Input size="lg" label="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-
+            
             <Select label="Blood Group" size="lg" value={formData.bloodGroup} onChange={handleSelectChange}>
               <Option value="O+">O+</Option>
               <Option value="O-">O-</Option>
@@ -117,13 +124,14 @@ export function SignUp() {
 
             {/* Hospital Dropdown */}
             <Select label="Hospital Name" size="lg" value={formData.hospitalName} onChange={handleHospitalChange}>
-              {/* List of hospitals in Punjab, Pakistan */}
               <Option value="Lahore General Hospital">Lahore General Hospital</Option>
               <Option value="Mayo Hospital Lahore">Mayo Hospital Lahore</Option>
               <Option value="Punjab Institute of Cardiology">Punjab Institute of Cardiology</Option>
               <Option value="Services Hospital Lahore">Services Hospital Lahore</Option>
-              {/* Add more hospitals as required */}
             </Select>
+
+            {/* Profile Picture Upload */}
+            <Input size="lg" type="file" label="Profile Picture" name="profilePicture" onChange={handleFileChange} />
           </div>
 
           <Checkbox

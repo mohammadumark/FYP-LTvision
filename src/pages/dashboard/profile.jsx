@@ -11,7 +11,8 @@ export function Profile() {
     password: '',
     specialty: '',
     description: '',
-    isAvailable: false,
+    isAvailable: true,
+    profilePicture: '', // Ensure this is initialized correctly
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -34,7 +35,8 @@ export function Profile() {
             hospitalName: data.hospitalName,
             specialty: data.specialty || '',
             description: data.description || '',
-            isAvailable: data.isAvailable || false,
+            isAvailable: data.isAvailable || true,
+            profilePicture: data.profilePicture || '', // Ensure profilePicture is returned from backend
           });
         } else {
           console.error('Error fetching profile data:', data.error);
@@ -62,7 +64,17 @@ export function Profile() {
       isAvailable: !prevData.isAvailable,
     }));
   };
-  
+
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileData({ ...profileData, profilePicture: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -92,19 +104,39 @@ export function Profile() {
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
         <div className="flex flex-col items-center mb-8">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxapDwCeVLL0T69nhwV_BgqH9lztNDYQGhCbUVKHMgITKzGDlPsa55HS-6dqUdC8Qt5VU&usqp=CAU"
+            src={`http://localhost:5000${profileData.profilePicture || "/uploads/placeholder.png"}`}
+            // src={profileData.profilePicture || "https://default.profile.picture.url/placeholder.png"}
             alt="Profile"
             className="w-24 h-24 rounded-full border-4 border-white shadow-md"
           />
+
+          {/* Edit Profile Picture Button */}
+          {isEditing && (
+            <Button
+              size="sm"
+              className="mt-2"
+              onClick={() => document.getElementById("uploadProfilePicture").click()}
+            >
+              Edit Profile Picture
+            </Button>
+          )}
+          <input
+            id="uploadProfilePicture"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleProfilePictureChange}
+          />
+
           <Typography variant="h5" className="mt-4">
-            {profileData.username || 'N/A'}
+            {profileData.username || "N/A"}
           </Typography>
-          <Typography className="text-gray-600">{profileData.specialty || 'Specialty not set'}</Typography>
+          <Typography className="text-gray-600">
+            {profileData.specialty || "Specialty not set"}
+          </Typography>
         </div>
 
         <form className="space-y-6">
-
-
           {/* Availability Switch */}
           <div className="flex items-center">
             <Typography variant="h6" className="mr-4">
@@ -117,8 +149,6 @@ export function Profile() {
               disabled={!isEditing}
             />
           </div>
-
-
 
           {/* Description Section */}
           <div>
