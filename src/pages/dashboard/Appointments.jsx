@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaCalendarAlt, FaComment, FaTimes, FaClock, FaCheck, FaBan } from "react-icons/fa";
+import { FaCalendarAlt, FaClock, FaCheck, FaBan } from "react-icons/fa";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
@@ -56,9 +56,9 @@ export function Appointment() {
         { status }
       );
       const updatedAppointment = response.data.appointment;
-  
+
       console.log("Updated appointment:", updatedAppointment); // Debugging line
-  
+
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>
           appointment._id === appointmentId ? updatedAppointment : appointment
@@ -69,7 +69,6 @@ export function Appointment() {
       setError("Failed to update appointment status.");
     }
   };
-  
 
   const acceptAppointment = (appointmentId) => {
     updateAppointmentStatus(appointmentId, "accepted");
@@ -78,6 +77,11 @@ export function Appointment() {
   const cancelAppointment = (appointmentId) => {
     updateAppointmentStatus(appointmentId, "cancelled");
   };
+
+  // Filter out cancelled appointments
+  const filteredAppointments = appointments.filter(
+    (appointment) => appointment.status !== "cancelled"
+  );
 
   if (loading) {
     return <div>Loading...</div>;
@@ -102,8 +106,11 @@ export function Appointment() {
         {/* Scrollable Appointment List */}
         <div className="flex">
           <div className="w-3/4 max-h-96 overflow-y-auto grid grid-cols-2 gap-4">
-            {appointments.map((appointment) => (
-              <div key={appointment._id} className="flex items-start p-4 bg-white rounded-lg shadow-md space-x-4">
+            {filteredAppointments.map((appointment) => (
+              <div
+                key={appointment._id}
+                className="flex items-start p-4 bg-white rounded-lg shadow-md space-x-4"
+              >
                 <img
                   src="https://via.placeholder.com/50"
                   alt="User"
