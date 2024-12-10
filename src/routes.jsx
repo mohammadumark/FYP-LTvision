@@ -20,6 +20,8 @@ const icon = {
   className: "w-5 h-5 text-inherit",
 };
 
+const isAuthenticated = localStorage.getItem("token"); // Replace with your own auth logic
+
 export const routes = [
   {
     layout: "dashboard",
@@ -40,24 +42,22 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "Appointments",
         path: "/Appointments",
-        element: <Appointment/>,
+        element: <Appointment />,
       },
       {
-        icon: <UserGroupIcon {...icon} />, // Updated icon for Patients
+        icon: <UserGroupIcon {...icon} />,
         name: "Patients",
         path: "/Patients",
         element: <Patients />,
       },
-
       {
         icon: <ArrowUpTrayIcon {...icon} />,
         name: "Upload CT Scan",
         path: "/upload-ct-scan",
-        element: <CTScanUpload />, // Corresponding component
+        element: <CTScanUpload />,
       },
-      
       {
-        icon: <ChatBubbleBottomCenterTextIcon {...icon} />, // Updated icon for Chats
+        icon: <ChatBubbleBottomCenterTextIcon {...icon} />,
         name: "Report",
         path: "/Report",
         element: <Report />,
@@ -71,22 +71,24 @@ export const routes = [
     ],
   },
   {
-    title: "auth pages",
+    title: "",
     layout: "auth",
-    pages: [
-      {
-        icon: <ServerStackIcon {...icon} />,
-        name: "sign in",
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      {
-        icon: <RectangleStackIcon {...icon} />,
-        name: "sign up",
-        path: "/sign-up",
-        element: <SignUp />,
-      },
-    ],
+    pages: isAuthenticated
+      ? [] // Hide auth pages if user is logged in
+      : [
+          {
+            // icon: <ServerStackIcon {...icon} />,
+            name: "",
+            path: "/sign-in",
+            element: <SignIn />,
+          },
+          {
+            // icon: <RectangleStackIcon {...icon} />,
+            name: "",
+            path: "/sign-up",
+            element: <SignUp />,
+          },
+        ],
   },
 ];
 
