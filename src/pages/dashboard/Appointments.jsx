@@ -71,11 +71,17 @@ export function Appointment() {
   };
 
   const acceptAppointment = (appointmentId) => {
-    updateAppointmentStatus(appointmentId, "accepted");
+    const confirmAccept = window.confirm("Are you sure you want to accept this appointment?");
+    if (confirmAccept) {
+      updateAppointmentStatus(appointmentId, "accepted");
+    }
   };
 
   const cancelAppointment = (appointmentId) => {
-    updateAppointmentStatus(appointmentId, "cancelled");
+    const confirmCancel = window.confirm("Are you sure you want to cancel this appointment?");
+    if (confirmCancel) {
+      updateAppointmentStatus(appointmentId, "cancelled");
+    }
   };
 
   // Filter out cancelled appointments
