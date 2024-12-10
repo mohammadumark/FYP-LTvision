@@ -9,8 +9,12 @@ import {
 } from "@/widgets/layout";
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
+import { useState } from "react"; // Import useState to manage image state
+import CTScanUpload from "@/pages/dashboard/CTScanUpload"; // Import the components
+import Report from "@/pages/dashboard/Report"; // Import the components
 
 export function Dashboard() {
+  const [image, setImage] = useState(null); // Manage image state here
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
 
@@ -38,8 +42,20 @@ export function Dashboard() {
           {routes.map(
             ({ layout, pages }) =>
               layout === "dashboard" &&
-              pages.map(({ path, element }) => (
-                <Route exact path={path} element={element} />
+              pages.map(({ path, element, name }) => (
+                <Route
+                  key={name}
+                  path={path}
+                  element={
+                    name === "Upload CT Scan" ? (
+                      <CTScanUpload onUploadComplete={(selectedImage) => setImage(selectedImage)} />
+                    ) : name === "Report" ? (
+                      <Report image={image} />
+                    ) : (
+                      element
+                    )
+                  }
+                />
               ))
           )}
         </Routes>

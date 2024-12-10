@@ -12,8 +12,9 @@ import {
 import { Home, Profile, Appointment, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Patients from "./pages/dashboard/Patients";
-import Chats from "./pages/dashboard/Chats";
-import UploadCtScans from "./pages/dashboard/UploadCtScans";
+import Chats from "./pages/dashboard/Report";
+import CTScanUpload from "./pages/dashboard/CTScanUpload";
+import Report from "./pages/dashboard/Report";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -47,17 +48,19 @@ export const routes = [
         path: "/Patients",
         element: <Patients />,
       },
+
       {
-        icon: <ArrowUpTrayIcon {...icon} />, // Icon for Upload CT Scan
+        icon: <ArrowUpTrayIcon {...icon} />,
         name: "Upload CT Scan",
         path: "/upload-ct-scan",
-        element: <UploadCtScans />, // Corresponding component
+        element: <CTScanUpload />, // Corresponding component
       },
+      
       {
         icon: <ChatBubbleBottomCenterTextIcon {...icon} />, // Updated icon for Chats
-        name: "Chats",
-        path: "/Chats",
-        element: <Chats />,
+        name: "Report",
+        path: "/Report",
+        element: <Report />,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
