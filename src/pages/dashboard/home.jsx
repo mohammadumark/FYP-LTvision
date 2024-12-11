@@ -66,9 +66,9 @@ export function Home() {
   }
 
   return (
-    <div className="mt-8 flex justify-between space-x-6"> {/* Adjusted space between divs */}
+    <div className="mt-8 flex justify-between space-x-6 item-center"> {/* Adjusted space between divs */}
       {/* Left side - Time filter and Appointments */}
-      <div className="p-6 bg-white shadow-md rounded-lg w-2/5"> {/* Adjusted width */}
+      <div className="p-6 bg-white shadow-md rounded-lg w-[70%] mx-auto"> {/* Adjusted width */}
         <div className="mb-6 flex flex-col items-center">
           <div className="mb-4">
             <h2 className="text-2xl font-bold text-gray-800">Upcoming Appointments</h2>
@@ -84,7 +84,7 @@ export function Home() {
             </span>
           </div>
         </div>
-        <div className="space-y-4 h-80 overflow-y-auto">
+        <div className="space-y-4 overflow-y-auto max-w-screen-lg mx-auto">
           {appointments.map((appointment) => (
             <div key={appointment._id} className="flex flex-col p-4 bg-gray-100 rounded-lg shadow-sm">
               <div className="flex items-center">
@@ -115,10 +115,7 @@ export function Home() {
         </div>
       </div>
 
-      {/* Right side - CT Scan Upload */}
-      <div className="p-6 bg-white shadow-md rounded-lg w-2/5"> {/* Adjusted width */}
-        <UploadCtScan />
-      </div>
+    
     </div>
   );
 }

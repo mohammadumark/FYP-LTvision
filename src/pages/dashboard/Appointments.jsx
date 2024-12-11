@@ -98,8 +98,8 @@ export function Appointment() {
   }
 
   return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
-      <div className="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6">
+    <div className="mt-12 mb-8 flex flex-col gap-12 ">
+      <div className="bg-white w-[75%] max-w-4xl rounded-lg shadow-lg p-6 mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Upcoming Appointments</h2>
@@ -110,8 +110,8 @@ export function Appointment() {
         </div>
 
         {/* Scrollable Appointment List */}
-        <div className="flex">
-          <div className="w-3/4 max-h-96 overflow-y-auto grid grid-cols-2 gap-4">
+        <div className="flex  ">
+          <div className="w-3/4 max-h-96 overflow-y-hidden grid grid-cols-2 gap-4">
             {filteredAppointments.map((appointment) => (
               <div
                 key={appointment._id}

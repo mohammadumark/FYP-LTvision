@@ -10,7 +10,7 @@ import logging
 import cv2
 
 # Initialize the Flask app and enable CORS
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)
 
 # Load the pre-trained tumor detection model
@@ -113,5 +113,5 @@ def predict():
     return jsonify(result)
 
 # Run the Flask app
-if _name_ == '_main_':
+if __name__== '_main_':
     app.run(debug=True)

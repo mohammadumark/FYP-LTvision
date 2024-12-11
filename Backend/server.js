@@ -28,7 +28,7 @@ mongoose
 app.use('/api/auth', authRoutes);
 app.use('/api', patientRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'routes', 'uploads')));
-app.use('/api/doctors', doctorRoutes); // Ensure the path to doctorRoutes matches the actual file structure
+app.use('/api/doctorss', doctorRoutes); // Ensure the path to doctorRoutes matches the actual file structure
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -4,38 +4,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px;
-    background-color: #f1f8ff; /* Light blue background */
-    font-family: 'Arial', sans-serif;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
+    padding: 40px;
+    background-color: #ffffff; /* Clean white background */
+    font-family: 'Roboto', sans-serif;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 900px;
     margin: auto;
 }
 
 /* Title Styling */
 .report-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #2a7f8f; /* Teal color */
+    font-size: 36px;
+    font-weight: 700;
+    color: #2a7f8f; /* Professional teal */
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 /* Loading Text Styling */
 .report-loading {
-    font-size: 18px;
+    font-size: 20px;
     color: #ff5722; /* Bright orange for loading */
     font-weight: bold;
 }
 
 /* Report Status Text Styling */
 .report-status {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #333;
+    font-size: 20px;
+    margin: 15px 0;
+    color: #444444; /* Dark gray for general text */
     font-weight: 500;
+    text-align: left;
+    width: 100%;
 }
 
 /* Tumor Detected Styling */
@@ -51,64 +53,59 @@
 /* Image Styling */
 .report-result-image {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 400px;
     margin-top: 20px;
-    border-radius: 8px;
-    border: 3px solid #cccccc;
+    border-radius: 10px;
+    border: 2px solid #eeeeee; /* Light gray border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Save Button Styling */
 .report-save-button {
-    background-color: #6200ea; /* Purple button */
+    background-color: #007bff; /* Primary blue button */
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 15px 30px;
     font-size: 18px;
     margin-top: 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 /* Button Hover Effect */
 .report-save-button:hover {
-    background-color: #3700b3; /* Darker purple on hover */
+    background-color: #0056b3; /* Darker blue on hover */
     transform: scale(1.05); /* Slight scale effect */
 }
 
 /* Button Focus Effect */
 .report-save-button:focus {
     outline: none;
-    box-shadow: 0 0 0 4px rgba(98, 0, 234, 0.3); /* Focus ring with purple */
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3); /* Focus ring with blue */
 }
 
 /* Line Separator Styling */
 .report-separator {
-    width: 80%;
+    width: 100%;
     border-top: 2px solid #3f51b5; /* Blue line separator */
-    margin: 20px 0;
-}
-
-/* Background for PDF title */
-.pdf-title-background {
-    background-color: #ffeb3b; /* Yellow background for the title */
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
+    margin: 25px 0;
 }
 
 /* Responsive Design for Mobile */
 @media screen and (max-width: 600px) {
     .report-container {
-        padding: 15px;
+        padding: 20px;
     }
 
     .report-title {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     .report-save-button {
         font-size: 16px;
-        padding: 10px 20px;
+        padding: 12px 20px;
     }
 }
