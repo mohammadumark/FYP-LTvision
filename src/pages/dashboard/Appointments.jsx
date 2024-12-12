@@ -86,7 +86,7 @@ export function Appointment() {
 
   // Filter out cancelled appointments
   const filteredAppointments = appointments.filter(
-    (appointment) => appointment.status !== "cancelled"
+    (appointment) => appointment.status !== "cancelled" && appointment.status !== "accepted"
   );
 
   if (loading) {
@@ -102,7 +102,7 @@ export function Appointment() {
       <div className="bg-white w-[75%] max-w-4xl rounded-lg shadow-lg p-6 mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Upcoming Appointments</h2>
+          <h2 className="text-xl font-bold">Appointments Requests</h2>
           <div className="flex items-center space-x-2">
             <FaCalendarAlt className="text-black" />
             <span className="font-semibold">December, 2024</span>
@@ -117,11 +117,11 @@ export function Appointment() {
                 key={appointment._id}
                 className="flex items-start p-4 bg-white rounded-lg shadow-md space-x-4"
               >
-                <img
+                {/* <img
                   src="https://via.placeholder.com/50"
                   alt="User"
                   className="w-12 h-12 rounded-full"
-                />
+                /> */}
                 <div className="flex-1">
                   <div className="flex items-center text-lg font-semibold">
                     <FaClock className="mr-2 text-gray-600" />

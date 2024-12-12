@@ -12,7 +12,6 @@ import {
 import { Home, Profile, Appointment, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Patients from "./pages/dashboard/Patients";
-import Chats from "./pages/dashboard/Report";
 import CTScanUpload from "./pages/dashboard/CTScanUpload";
 import Report from "./pages/dashboard/Report";
 
@@ -62,12 +61,12 @@ export const routes = [
         path: "/Report",
         element: <Report />,
       },
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
-        path: "/notifications",
-        element: <Notifications />,
-      },
+      // {
+      //   icon: <InformationCircleIcon {...icon} />,
+      //   name: "notifications",
+      //   path: "/notifications",
+      //   element: <Notifications />,
+      // },
     ],
   },
   {

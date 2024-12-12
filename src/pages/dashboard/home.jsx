@@ -89,7 +89,7 @@ export function Home() {
             <div key={appointment._id} className="flex flex-col p-4 bg-gray-100 rounded-lg shadow-sm">
               <div className="flex items-center">
                 <div className="mr-4">
-                  <img className="w-16 h-16 rounded-full" src="/img/assets/per.png" alt="Person Image" />
+                  {/* <img className="w-16 h-16 rounded-full" src="/img/assets/per.png" alt="Person Image" /> */}
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center mb-2">
