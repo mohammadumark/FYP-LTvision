@@ -9,8 +9,6 @@ function getCurrentMonthYear() {
   return date.toLocaleDateString(undefined, options);
 }
 
-// const selectedDay = 'Monday'; // Set the selected day as needed
-
 export function Home() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -89,36 +87,32 @@ export function Home() {
             <div key={appointment._id} className="flex flex-col p-4 bg-gray-100 rounded-lg shadow-sm">
               <div className="flex items-center">
                 <div className="mr-4">
-                  {/* <img className="w-16 h-16 rounded-full" src="/img/assets/per.png" alt="Person Image" /> */}
+                  <img
+                    src="/img/assets/time.png" // Replace with the actual path to the time icon
+                    alt="Time Icon"
+                    className="w-6 h-6"
+                  />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center mb-2">
                     <span className="font-bold">{appointment.time}</span>
                   </div>
-                  <p className="font-semibold">{appointment.name}</p>
-                  <p className="text-sm text-gray-500">{appointment.message}</p>
+                  <p className="font-semibold">Patient Name: {appointment.name}</p>
+                  <p className="text-sm text-gray-500">Appointment Message: {appointment.message}</p>
                 </div>
               </div>
               <div className="mt-4 flex justify-between">
-                <button className="flex items-center px-4 py-2 rounded-lg text-white bg-blue-500">
-                  <img src="/img/assets/chat.png" alt="Chat" className="w-5 h-5 mr-2" /> Chat
-                </button>
-                <button className="flex items-center px-4 py-2 rounded-lg text-white bg-red-500">
-                  <img src="/img/assets/cancel.png" alt="Cancel" className="w-5 h-5 mr-2" /> Cancel
-                </button>
+                {/* Additional buttons or actions can be added here */}
               </div>
             </div>
           ))}
         </div>
         <div className="text-center mt-4">
-          <button className="text-blue-500 hover:underline">See All</button>
+          {/* Optional see all button */}
         </div>
       </div>
-
-    
     </div>
   );
 }
-
 
 export default Home;

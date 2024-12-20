@@ -193,9 +193,9 @@ export function Patients() {
                 <td className="py-2 px-4 border-b">{formatDate(patient.lastVisit)}</td>
                 <td className={`py-2 px-4 border-b ${getDiagnosisColor(patient.diagnosis)}`}>{patient.diagnosis}</td>
                 <td className="py-2 px-4 border-b space-x-2">
-                  <button className="text-blue-500 hover:underline" onClick={() => handleViewProfile(patient)}>
+                  {/* <button className="text-blue-500 hover:underline" onClick={() => handleViewProfile(patient)}>
                     Profile
-                  </button>
+                  </button> */}
                   <button
                     className="text-red-500 hover:underline"
                     onClick={() => handleRemovePatient(patient.id)}

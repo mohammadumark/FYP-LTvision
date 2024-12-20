@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import 'colors.css';
+
+/* General styles */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* General Container Styles */
+.table-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none; /* Hide the table border */
+}
+
+.patient-table th, .patient-table td {
+  border: none; /* Hide cell borders */
+  padding: 8px;
+  text-align: left;
+}
+
+.patient-table th {
+  background-color: rgb(57, 143, 255); /* Change header background color to blue */
+  color: white; /* Change header text color to white */
+  position: sticky;
+  top: 0;
+}
+
+.patient-table tbody tr:nth-child(odd) {
+  background-color: white; /* Ensure odd rows have a consistent background color */
+}
+
+.patient-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Ensure even rows have a consistent background color */
+}
+
+.patient-table .status.active {
+  color: green;
+}
+
+.patient-table .status.non-active {
+  color: red;
+}
+
+.patient-table .status.new-patient {
+  color: purple;
+}
+
+.patient-table .diagnosis.normal {
+  color: green;
+}
+
+.patient-table .diagnosis.diagnosed {
+  color: red;
+}
+
+.pdf-icon {
+  color: red; /* Color for the PDF icon */
+  font-size: 1.5em; /* Adjust the size as needed */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.btn-profile {
+  color: rgb(0, 119, 255); /* Change text color to blue */
+  font-weight: bold; /* Make text bold */
+}
+
+.btn-remove {
+  color: red; /* Change text color to red */
+  font-weight: normal; /* Normal font weight */
+}
+
+.user-icon {
+  color: gray; /* Color for the user icon */
+  font-size: 1.2em; /* Adjust the size as needed */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.home-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Inner Container */
+.inner-container-p {
+  background-color: rgb(255, 255, 255);
+  height: 86vh;
+  width: 100%;
+  margin-top: 39px;
+  margin-left: 40px;
+  margin-right: 15px;
+  overflow: hidden;
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1; /* Take remaining space */
+  display: flex; /* Make the main content a flex container */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Center items horizontally */
+  background-color: var(--primary-color); /* Set background color */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .home-container {
+    /* flex-direction: column; */
+  }
+
+  .navigation-container {
+    height: 100vh;
+  }
+
+  .nav-option {
+    padding: 8px 12px;
+  }
+
+  .selected {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    padding: 10px 12px;
+    width: max-content; /* Set width to fit content */
+  }
+
+  .main-content {
+    height: 30vh;
+    overflow-y: auto;
+  }
+}

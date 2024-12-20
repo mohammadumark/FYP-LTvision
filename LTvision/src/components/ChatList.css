@@ -1,0 +1,49 @@
+.container {
+    max-width: 400px;
+    height: 100vh;
+    margin-top: 0px;
+    background-color: aliceblue;
+    margin-left: opx;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+  
+  .searchField {
+    margin-bottom: 8px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .listItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    margin-right: 10px;
+  }
+  
+  .listItemText {
+    flex: 1;
+  }
+  
+  .primaryText {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .secondaryText {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .dateText {
+    margin-left: auto;
+    font-size: 12px;
+    color: #999;
+  }
+  

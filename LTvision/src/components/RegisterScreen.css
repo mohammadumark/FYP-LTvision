@@ -1,0 +1,130 @@
+.Register-container-s {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f3f3;
+}
+
+.image-container {
+  width: 70%;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.form-container-s {
+  height: 100%;
+  width: 30%;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  align-items: center;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.logo-icon {
+  width: 67.98px;
+  height: 75.85px;
+  top: 118.17px;
+  left: 984px;
+  transform: rotate(-15.4deg);
+  margin-right: -27px;
+  margin-bottom: -20px;
+
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.buttons-container-s {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.login-button, .register-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-button {
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.register-button {
+  background-color: #007bff;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-button-s {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px; /* Adjust this value as needed */
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  color: red;
+  text-align: center;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .Register-container {
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 100%;
+    display: none; /* Hide image container on smaller screens */
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}

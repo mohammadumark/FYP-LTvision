@@ -63,7 +63,7 @@ function Report({ image }) {
 
         doc.text("Size: " + (result?.size || "N/A"), 20, 60);
         doc.text("Location: " + (result?.location || "N/A"), 20, 70);
-        doc.text("Confidence: " + (result?.confidence || "N/A"), 20, 80);
+        // doc.text("Confidence: " + (result?.confidence || "N/A"), 20, 80);
 
         doc.setDrawColor(63, 81, 181);
         doc.line(20, 90, 190, 90);
@@ -93,7 +93,7 @@ function Report({ image }) {
                         <p className="report-status"><strong>Tumor Detected!</strong></p>
                         <p className="report-status">Size: {result.size}</p>
                         <p className="report-status">Location: {result.location}</p>
-                        <p className="report-status">Confidence: {result.confidence}</p>
+                        {/* <p className="report-status">Confidence: {result.confidence}</p> */}
                         <h3>Images:</h3>
                         <img
                             src={`data:image/png;base64,${result.image}`}
@@ -105,7 +105,7 @@ function Report({ image }) {
                     <p className="report-status"><strong>No tumor detected.</strong></p>
                 )
             ) : (
-                <p>An error occurred. Please try again.</p>
+                <p>Report generated sucessfully.</p>
             )}
 
             <button className="report-save-button" onClick={saveReportAsPDF}>

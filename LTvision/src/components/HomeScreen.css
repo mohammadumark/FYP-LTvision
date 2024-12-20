@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* General Container Styles */
+.home-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Apply Poppins font to body */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Inner Container */
+.inner-container1{
+  background-color: rgb(255, 255, 255);
+  height: 86vh;
+  width: 82vh;
+  border-radius: 26px;
+  margin-top: 39px;
+  margin-left: 40px;
+  margin-right: 15px;
+  overflow: hidden;
+}
+
+/* Logo and Icons */
+.logo-icon {
+  color: white;
+  font-size: -40px;
+  width: 67.98px;
+  height: 75.85px;
+  top: 118.17px;
+  left: 984px;
+  transform: rotate(-15.4deg);
+  margin-right: -27px;
+  margin-bottom: -20px;
+}
+
+.calendar-icon {
+  width: 23px;
+  height: 17px;
+}
+
+/* Hide scrollbar */
+.navigation-container::-webkit-scrollbar {
+  display: none; 
+}
+
+/* Headings */
+h2 {
+  margin-top: -22px;
+}
+
+/* Navigation Container */
+.navigation-container {
+  width: 30vh;
+  background: var(--nav-color);
+  padding: 60px;
+  overflow-y: auto;
+}
+
+.nav-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  height: 33px;
+  color: white;
+  font-size: 20px;
+  padding: 8px 12px; /* Add padding to give some space around the text */
+}
+
+.nav-option:hover,
+.selected {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  width: max-content;
+}
+
+.nav-option:hover .nav-icon,
+.selected .nav-icon {
+  filter: invert(100%);
+}
+
+.nav-icon,
+.nav-icon-dash {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+  fill: white;
+}
+
+.nav-icon-dash {
+  filter: invert(100%);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1; /* Take remaining space */
+  display: flex; /* Make the main content a flex container */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Center items horizontally */
+  background-color: var(--primary-color); /* Set background color */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Calendar and Appointment Info */
+.up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 20px 0px 18px; /* Adjust margin for top, right, bottom, and left */
+}
+.up h2{
+  font-size: large;
+}
+
+.calendar {
+  display: flex;
+  align-items: center;
+  margin-right: 18px;
+  margin-bottom: 2px;
+}
+
+.current-month-year {
+  margin-left: 5px; /* Add margin between calendar icon and text */
+}
+
+/* Info Container */
+.info {
+  display: flex;
+  justify-content: space-between; /* Align children elements at the start and end of the container */
+  align-items: center; /* Align items vertically */
+  margin: 0px 0 0px 18px; /* Adjust margin for top, right, bottom, and left */
+}
+
+/* Appointment Details */
+.app-details {
+  display: flex;
+  justify-content: space-between; /* Align children elements at the start and end of the container */
+  align-items: center; /* Align items vertically */
+  margin: 0px 0 10px 18px; /* Adjust margin for top, right, bottom, and left */
+}
+
+.chat-btn {
+  display: flex;
+  align-items: center;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 18px;
+  width: 230px;
+  height: 118px;
+  margin-right: 40px;
+  background-color: #6997dd38;
+  margin-top: 10px;
+}
+
+.inner-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 18px;
+  height: 58px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border: 1px solid #6997dd;
+  margin-bottom: 0px;
+ 
+}
+
+/* Picture Styles */
+.picture {
+  margin-right: 15px; /* Adjust spacing as needed */
+  border-radius: 28px;
+}
+
+.per {
+  height: 67px;
+  width: 75px;
+  border-radius: 24px;
+}
+/* Details Styles */
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Time Container */
+.time-container {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Adjust spacing between icon and time text as needed */
+}
+
+.icon {
+  width: 20px; /* Adjust icon size as needed */
+  height: 20px; /* Adjust icon size as needed */
+}
+
+.bold-text {
+  font-weight: bold;
+  margin-bottom: 0; /* Remove default margin */
+  line-height: 1.0;
+}
+
+.bold-text2 {
+  font-weight: bolder;
+  line-height: 1.0;
+  font-size: 18px;
+  color: black;
+  margin-top: 4px;
+  margin-bottom: -12px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+.chat-button,
+.cancel-button {
+  background-color: transparent;
+  border: none;
+  color: inherit; /* Keep the text color as it is */
+}
+
+.chat-button {
+  color: var(--primary-color);
+}
+
+.cancel-button {
+  color: red;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px; /* Adjust padding as needed */
+  border: none;
+  background-color: #f0f0f0; /* Adjust background color as needed */
+  cursor: pointer;
+  font-size: 16px; /* Adjust font size as needed */
+  font-family: 'Poppins', sans-serif; /* Ensure buttons use Poppins font */
+}
+
+.button-icon {
+  margin-right: 8px; /* Adjust spacing between icon and text */
+  width: 20px; /* Adjust icon size as needed */
+  height: 20px; /* Adjust icon size as needed */
+}
+
+
+/* Day Container */
+.day-container {
+  display: inline-block;
+  width: 35px;
+  height: 30px;
+  text-align: center;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  border-radius: 14px;
+  font-size: 10px;
+  color: white;
+  margin-left: 18px;
+  font-weight: bold;
+}
+
+.day-container:hover,
+.day-container.selected {
+  background-color: pink;
+  border-color: pink;
+}
+
+/* Day Time Container */
+.day-time-container {
+  display: flex;
+  flex-direction: column; /* Arrange time containers vertically */
+}
+
+.day-time-container > div {
+  display: inline-block;
+  width: 90px;
+  height: 14px;
+  text-align: center;
+  padding: 10px;
+  margin: 5px 0; /* Adjust margin */
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
+  margin-left: 18px;
+  background-color: pink;
+  border-color: pink;
+}
+
+/* Additional Container */
+.additional-container {
+  background-color: rgb(255, 255, 255);
+  margin-top: 39px;
+  height: 86vh;
+  width: 78vh;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: 24px;
+  display: flex;
+  justify-content: center; /* horizontally center */
+  align-items: center; /* vertically center */
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .home-container {
+    /* flex-direction: column; */
+  }
+
+  .navigation-container {
+    height: 100vh;
+  }
+
+  .nav-option {
+    padding: 8px 12px;
+  }
+
+  .selected {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    padding: 10px 12px;
+    width: max-content; /* Set width to fit content */
+  }
+
+  .main-content {
+    height: 30vh;
+    overflow-y: auto;
+  }
+}

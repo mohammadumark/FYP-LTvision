@@ -52,7 +52,7 @@ export function Configurator() {
     green: "from-green-400 to-green-600",
     orange: "from-orange-400 to-orange-600",
     red: "from-red-400 to-red-600",
-    pink: "from-pink-400 to-pink-600",
+    blue: "from-blue-400 to-blue-600",
   };
 
   React.useEffect(() => {
@@ -146,10 +146,7 @@ export function Configurator() {
             />
           </div>
           <hr />
-         
-        
         </div>
-        
       </div>
     </aside>
   );

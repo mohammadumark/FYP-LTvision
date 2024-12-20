@@ -1,49 +1,118 @@
-ctscanupload.css
 .ctscan-container {
-    padding: 20px;
+    padding: 30px;
     text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
 }
 
 .ctscan-title {
-    font-size: 24px;
+    font-size: 28px;
     color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 .ctscan-label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 16px;
     color: #555;
+    font-weight: 500;
 }
 
 .ctscan-input {
     margin-bottom: 20px;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.ctscan-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
 .ctscan-preview-container {
     margin-top: 20px;
+    text-align: left;
+}
+
+.ctscan-preview-container h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
 }
 
 .ctscan-preview-image {
     max-width: 100%;
     height: auto;
     border: 2px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ctscan-preview-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .ctscan-button {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .ctscan-button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.ctscan-button:active {
+    transform: translateY(0);
+}
+
+.ctscan-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ctscan-container {
+        padding: 20px;
+    }
+
+    .ctscan-title {
+        font-size: 24px;
+    }
+
+    .ctscan-input {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .ctscan-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
 }

@@ -1,0 +1,265 @@
+/* General Container Styles */
+.home-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+  }
+  
+  /* Inner Container */
+  .inner-container {
+    background-color: rgb(255, 255, 255);
+    height: 86vh;
+    width: 85%;
+    border-radius: 26px;
+    margin-top: 39px;
+    margin-left: 12px;
+    margin-right: 12px;
+    overflow: hidden;
+  }
+  
+  /* Navigation Container */
+  .navigation-container {
+    width: 30vh;
+    background: var(--nav-color);
+    padding: 60px;
+    overflow-y: auto;
+  }
+  
+  .nav-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    height: 33px;
+    color: white;
+    font-size: 20px;
+    padding: 8px 12px; /* Add padding to give some space around the text */
+  }
+  
+  .nav-option:hover,
+  .selected {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    width: max-content;
+  }
+  
+  .nav-option:hover .nav-icon,
+  .selected .nav-icon {
+    filter: invert(100%);
+  }
+  
+  .nav-icon,
+  .nav-icon-dash {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+    fill: white;
+  }
+  
+  .nav-icon-dash {
+    filter: invert(100%);
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  /* Calendar and Appointment Info */
+  .up,
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14 18px;
+  }
+  
+  .calendar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .current-month-year {
+    margin-left: 5px;
+  }
+  
+  /* Appointment Details */
+  .app-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 18px 10px;
+  }
+  
+  /* Card Styles */
+  .card {
+    border-radius: 18px;
+    width: 230px;
+    height: 118px;
+    margin-right: 40px;
+    background-color: #6997dd38;
+    margin-top: 10px;
+  }
+  
+  .inner-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 18px;
+    height: 58px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border: 1px solid #6997dd;
+  }
+  
+  /* Picture Styles */
+  .picture {
+    margin-right: 15px;
+    border-radius: 28px;
+  }
+  
+  .per {
+    height: 67px;
+    width: 75px;
+    border-radius: 24px;
+  }
+  
+  /* Details Styles */
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Time Container */
+  .time-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+    margin-bottom: 0;
+    line-height: 1.0;
+  }
+  
+  .bold-text2 {
+    font-weight: bolder;
+    line-height: 1.0;
+    font-size: 18px;
+    color: black;
+    margin-top: 4px;
+    margin-bottom: -12px;
+  }
+  
+  /* Buttons */
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .button-icon {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Day Container */
+  .day-container {
+    display: inline-block;
+    width: 35px;
+    height: 30px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: 14px;
+    font-size: 10px;
+    color: white;
+    margin-left: 18px;
+    font-weight: bold;
+  }
+  
+  .day-container:hover,
+  .day-container.selected {
+    background-color: pink;
+    border-color: pink;
+  }
+  
+  /* Day Time Container */
+  .day-time-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .day-time-container > div {
+    display: inline-block;
+    width: 90px;
+    height: 14px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    margin-left: 18px;
+    background-color: pink;
+    border-color: pink;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 768px) {
+    .home-container {
+      /* flex-direction: column; */
+    }
+  
+    .navigation-container {
+      height: 100vh;
+    }
+  
+    .nav-option {
+      padding: 8px 12px;
+    }
+  
+    .selected {
+      background-color: white;
+      color: black;
+      border-radius: 20px;
+      padding: 10px 12px;
+      width: max-content;
+    }
+  
+    .main-content {
+      height: 30vh;
+      overflow-y: auto;
+    }
+  }
+  

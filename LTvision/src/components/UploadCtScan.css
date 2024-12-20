@@ -1,0 +1,49 @@
+/* src/components/UploadCtScan.css */
+
+.upload-ct-scan {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f0f8ff;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .upload-btn {
+    background-color: #6495ed;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .upload-area {
+    border: 2px dashed #6495ed;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .upload-cloud p {
+    margin: 10px 0;
+  }
+  
+  .choose-file-btn {
+    background-color: #6495ed;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
