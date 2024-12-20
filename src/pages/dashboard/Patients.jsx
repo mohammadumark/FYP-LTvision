@@ -62,31 +62,10 @@ export function Patients() {
     setShowProfile(true);
   };
 
-  // const handleRemovePatient = async (patientId) => {
-  //   const confirmed = window.confirm("Are you sure you want to remove this patient?");
-  //   if (confirmed) {
-  //     try {
-  //       await axios.delete(`http://localhost:5000/api/patients/remove/${patientId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       console.log("Patient removed successfully");
-  //       fetchPatients(); // Fetch updated patient list
-  //     } catch (error) {
-  //       console.error("Error removing patient:", error.response ? error.response.data : error.message);
-  //     }
-  //   }
-  // };
-
-
-
-
   const handleRemovePatient = async (patientId) => {
     const confirmed = window.confirm("Are you sure you want to remove this patient?");
     if (confirmed) {
       try {
-        // Directly send the patientId as a string
         await axios.delete(`http://localhost:5000/api/patients/remove/${patientId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,8 +78,6 @@ export function Patients() {
       }
     }
   };
-  
-  
 
   const formatDate = (date) => {
     const formattedDate = new Date(date);
@@ -129,27 +106,27 @@ export function Patients() {
   }
 
   return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Patient List</h2>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={() => setShowForm(!showForm)}>
+    <div className="mt-12 mb-8 flex flex-col gap-12 px-6">
+      <div className="p-6 bg-white shadow-lg rounded-lg">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800">Patient List</h2>
+          <button className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-200" onClick={() => setShowForm(!showForm)}>
             + Add Patient
           </button>
         </div>
 
         {showForm && (
-          <form id="addPatientForm" className="mb-4" onSubmit={handleAddPatient}>
-            <div className="flex flex-col gap-2">
+          <form id="addPatientForm" className="mb-6 p-6 bg-gray-100 rounded-lg shadow-md" onSubmit={handleAddPatient}>
+            <div className="flex flex-col gap-4">
               <input
                 type="text"
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="border rounded p-2"
+                className="border-2 border-gray-300 rounded-lg p-3"
               />
-              <select value={status} onChange={(e) => setStatus(e.target.value)} className="border rounded p-2">
+              <select value={status} onChange={(e) => setStatus(e.target.value)} className="border-2 border-gray-300 rounded-lg p-3">
                 <option value="Active">Active</option>
                 <option value="Non-Active">Non-Active</option>
                 <option value="New Patient">New Patient</option>
@@ -160,44 +137,50 @@ export function Patients() {
                 value={lastVisit}
                 onChange={(e) => setLastVisit(e.target.value)}
                 required
-                className="border rounded p-2"
+                className="border-2 border-gray-300 rounded-lg p-3"
               />
-              <select value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} className="border rounded p-2">
+              <select value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} className="border-2 border-gray-300 rounded-lg p-3">
                 <option value="Normal">Normal</option>
                 <option value="Diagnosed">Diagnosed</option>
               </select>
-              <button type="submit" className="bg-blue-500 text-white py-2 rounded">
+              <button type="submit" className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200">
                 Add Patient
               </button>
             </div>
           </form>
         )}
 
-        <table className="min-w-full bg-white border rounded shadow-md">
+        <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
           <thead>
-            <tr className="bg-blue-100 text-left">
-              <th className="py-2 px-4 border-b">NAME</th>
-              <th className="py-2 px-4 border-b">#ID</th>
-              <th className="py-2 px-4 border-b">STATUS</th>
-              <th className="py-2 px-4 border-b">LAST VISIT</th>
-              <th className="py-2 px-4 border-b">DIAGNOSIS</th>
-              <th className="py-2 px-4 border-b">ACTIONS</th>
+            <tr className="bg-blue-100 text-left text-sm font-semibold text-gray-700">
+              <th className="py-3 px-6 border-b">NAME</th>
+              <th className="py-3 px-6 border-b">#ID</th>
+              <th className="py-3 px-6 border-b">STATUS</th>
+              <th className="py-3 px-6 border-b">LAST VISIT</th>
+              <th className="py-3 px-6 border-b">DIAGNOSIS</th>
+              <th className="py-3 px-6 border-b">ACTIONS</th>
             </tr>
           </thead>
           <tbody>
-            {patients.map((patient) => (
-              <tr key={patient.id} className="hover:bg-gray-100">
-                <td className="py-2 px-4 border-b">{patient.name}</td>
-                <td className="py-2 px-4 border-b">{`P-${patient.id}`}</td>
-                <td className={`py-2 px-4 border-b ${getStatusColor(patient.status)}`}>{patient.status}</td>
-                <td className="py-2 px-4 border-b">{formatDate(patient.lastVisit)}</td>
-                <td className={`py-2 px-4 border-b ${getDiagnosisColor(patient.diagnosis)}`}>{patient.diagnosis}</td>
-                <td className="py-2 px-4 border-b space-x-2">
-                  {/* <button className="text-blue-500 hover:underline" onClick={() => handleViewProfile(patient)}>
-                    Profile
-                  </button> */}
+            {patients.map((patient, index) => (
+              <tr
+                key={patient.id}
+                className={`hover:bg-gray-50 ${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+              >
+                <td className="py-3 px-6 border-b text-sm text-gray-700">{patient.name}</td>
+                <td className="py-3 px-6 border-b text-sm text-gray-700">{`P-${patient.id}`}</td>
+                <td className={`py-3 px-6 border-b text-sm ${getStatusColor(patient.status)}`}>{patient.status}</td>
+                <td className="py-3 px-6 border-b text-sm text-gray-700">{formatDate(patient.lastVisit)}</td>
+                <td className={`py-3 px-6 border-b text-sm ${getDiagnosisColor(patient.diagnosis)}`}>{patient.diagnosis}</td>
+                <td className="py-3 px-6 border-b text-sm space-x-4">
                   <button
-                    className="text-red-500 hover:underline"
+                    className="text-blue-600 hover:text-blue-700 font-semibold transition duration-200"
+                    onClick={() => handleViewProfile(patient)}
+                  >
+                    View Profile
+                  </button>
+                  <button
+                    className="text-red-600 hover:text-red-700 font-semibold transition duration-200"
                     onClick={() => handleRemovePatient(patient.id)}
                   >
                     Remove

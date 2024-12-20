@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import UploadCtScan from './UploadCtScan';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
@@ -96,6 +95,7 @@ export function Home() {
                 <div className="flex flex-col">
                   <div className="flex items-center mb-2">
                     <span className="font-bold">{appointment.time}</span>
+                    <span className="ml-4 text-sm text-gray-600">{appointment.date}</span> {/* Display date next to time */}
                   </div>
                   <p className="font-semibold">Patient Name: {appointment.name}</p>
                   <p className="text-sm text-gray-500">Appointment Message: {appointment.message}</p>

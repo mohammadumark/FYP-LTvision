@@ -110,41 +110,39 @@ export function Appointment() {
         </div>
 
         {/* Scrollable Appointment List */}
-        <div className="flex  ">
-          <div className="w-3/4 max-h-96 overflow-y-hidden grid grid-cols-2 gap-4">
+        <div className="flex">
+          <div className="w-full grid grid-cols-2 gap-6 mx-auto">
             {filteredAppointments.map((appointment) => (
               <div
                 key={appointment._id}
-                className="flex items-start p-4 bg-white rounded-lg shadow-md space-x-4"
+                className="flex flex-col items-start p-6 bg-gray-200 rounded-lg shadow-md space-y-4"
               >
-                {/* <img
-                  src="https://via.placeholder.com/50"
-                  alt="User"
-                  className="w-12 h-12 rounded-full"
-                /> */}
-                <div className="flex-1">
+                {/* Appointment details */}
+                <div>
                   <div className="flex items-center text-lg font-semibold">
                     <FaClock className="mr-2 text-gray-600" />
                     {appointment.time}
                   </div>
                   <div className="text-sm font-medium">{appointment.name}</div>
                   <div className="text-xs text-gray-500">{appointment.message}</div>
-                  <div className="flex space-x-2 mt-2">
-                    <button
-                      onClick={() => acceptAppointment(appointment._id)}
-                      className="flex items-center space-x-1 text-green-500"
-                    >
-                      <FaCheck />
-                      <span>Accept</span>
-                    </button>
-                    <button
-                      onClick={() => cancelAppointment(appointment._id)}
-                      className="flex items-center space-x-1 text-red-500"
-                    >
-                      <FaBan />
-                      <span>Cancel</span>
-                    </button>
-                  </div>
+                </div>
+
+                {/* Action buttons */}
+                <div className="flex w-full justify-between mt-4">
+                  <button
+                    onClick={() => acceptAppointment(appointment._id)}
+                    className="flex items-center justify-center py-2 px-4 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600"
+                  >
+                    <FaCheck className="mr-2" />
+                    <span>Accept</span>
+                  </button>
+                  <button
+                    onClick={() => cancelAppointment(appointment._id)}
+                    className="flex items-center justify-center py-2 px-4 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600"
+                  >
+                    <FaBan className="mr-2" />
+                    <span>Cancel</span>
+                  </button>
                 </div>
               </div>
             ))}
