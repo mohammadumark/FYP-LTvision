@@ -115,7 +115,7 @@ export function Appointment() {
             {filteredAppointments.map((appointment) => (
               <div
                 key={appointment._id}
-                className="flex flex-col items-start p-6 bg-gray-200 rounded-lg shadow-md space-y-4"
+                className="flex flex-col items-start p-6 bg-gray-100 rounded-lg shadow-md space-y-4"
               >
                 {/* Appointment details */}
                 <div>

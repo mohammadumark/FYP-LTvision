@@ -121,7 +121,7 @@ function Report({ image }) {
   };
 
   return (
-    <div className="container mx-auto px-6 py-8  bg-blue-50 to-blue-80 min-h-screen">
+    <div className="container mx-auto px-6 py-8  bg-gray-50 min-h-screen">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8 border border-gray-300">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
           Medical Prediction Report
