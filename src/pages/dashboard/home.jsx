@@ -39,21 +39,28 @@ export function Home() {
   useEffect(() => {
     const fetchAppointments = async () => {
       if (!doctorId) return;
-
+  
       try {
         const response = await axios.get(`http://localhost:5001/api/appointments/${doctorId}`);
-        const acceptedAppointments = response.data.filter(appointment => appointment.status === "accepted");
-        setAppointments(acceptedAppointments); // Set fetched accepted appointments to state
+        const currentDate = new Date();
+        
+        // Filter appointments to include only "accepted" and with a date in the future or today
+        const filteredAppointments = response.data.filter(appointment => {
+          const appointmentDate = new Date(appointment.date); // Assuming `date` is in a valid format
+          return appointment.status === "accepted" && appointmentDate >= currentDate;
+        });
+        
+        setAppointments(filteredAppointments); // Set filtered appointments to state
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch appointments.");
         setLoading(false);
       }
     };
-
+  
     fetchAppointments();
   }, [doctorId]); // Re-fetch appointments if doctorId changes
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
