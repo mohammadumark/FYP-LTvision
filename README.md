@@ -18,22 +18,28 @@ I am a full-stack developer with expertise in web development, AI integration, a
 - Backend Development: Node.js, Express.js
 - Mobile Backend Development: Node.js, MongoDB
 
-## Featured Projects
+# Project Features
 
-### 1. AI-Powered Liver Tumor Detection
-- **Tools & Technologies**: Flask, OpenCV
-- Developed AI models for liver segmentation and tumor detection.
-- Integrated the models into a Flask API for real-time analysis.
+- **Core Features**: 
+  - Secure user authentication
+  - Symptom checker
+  - Doctor recommendations
+  - Appointment module
 
-### 2. Health-Tech Web Application
-- **Tools & Technologies**: MERN Stack
-- Built a user-friendly web application for secure user authentication, symptom checking, and doctor recommendations.
-- Integrated AI-powered diagnostics and reporting.
+- **AI Integration**: 
+  - Leveraged Flask for liver segmentation and tumor detection
+  
+- **Real-time Medical Image Analysis**
 
-### 3. Mobile App Backend
-- **Tools & Technologies**: Node.js, Express.js, MongoDB
-- Developed a robust backend for the mobile version of the health-tech app.
-- Ensured seamless integration with AI services and data storage.
+- **Robust Backend**: 
+  - Backend developed for the mobile health-tech application
+
+- **Seamless Integration**: 
+  - Integrated with AI services for enhanced functionality
+
+- **Efficient Data Management**: 
+  - Data storage and management handled using MongoDB
+
 
 ## Project Screenshots
 
